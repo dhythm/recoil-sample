@@ -20,6 +20,23 @@ function App() {
 const todoListState = atom({
   key: "todoListState",
   default: [],
+  effects: [
+    ({ setSelf, onSet }) => {
+      console.log('effects is called')
+      setTimeout(() => {
+        setSelf([
+          {
+            id: getId(),
+            text: 'delayed initilization',
+            isComplete: false,
+          },
+        ])
+      }, 1000)
+      return () => {
+        console.log('cleanup is called')
+      }
+    }
+  ]
 });
 
 const todoListFilterState = atom({
@@ -152,6 +169,7 @@ function getId() {
 function TodoItem({ item }) {
   const [todoList, setTodoList] = useRecoilState(todoListState);
   const index = todoList.findIndex((listItem) => listItem === item);
+  console.log('TodoItem is rendered')
 
   const editItemText = ({ target: { value } }) => {
     const newList = replaceItemAtIndex(todoList, index, {
