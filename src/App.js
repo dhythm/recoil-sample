@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import {
-  atom,
   RecoilRoot,
-  selector,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
 import "./App.css";
+import { filteredTodoListState, todoListFilterState, todoListState, todoListStatsState } from "./states";
+import { getId } from "./utils";
 
 function App() {
   return (
@@ -16,68 +16,6 @@ function App() {
     </RecoilRoot>
   );
 }
-
-const todoListState = atom({
-  key: "todoListState",
-  default: [],
-  effects: [
-    ({ setSelf, onSet }) => {
-      console.log('effects is called')
-      setTimeout(() => {
-        setSelf([
-          {
-            id: getId(),
-            text: 'delayed initilization',
-            isComplete: false,
-          },
-        ])
-      }, 1000)
-      return () => {
-        console.log('cleanup is called')
-      }
-    }
-  ]
-});
-
-const todoListFilterState = atom({
-  key: "todoListFilterState",
-  default: "Show All",
-});
-
-const filteredTodoListState = selector({
-  key: "filteredTodoListState",
-  get: ({ get }) => {
-    const filter = get(todoListFilterState);
-    const list = get(todoListState);
-
-    switch (filter) {
-      case "Show Completed":
-        return list.filter((item) => item.isComplete);
-      case "Show Uncompleted":
-        return list.filter((item) => !item.isComplete);
-      default:
-        return list;
-    }
-  },
-});
-
-const todoListStatsState = selector({
-  key: "todoListStatsState",
-  get: ({ get }) => {
-    const todoList = get(todoListState);
-    const totalNum = todoList.length;
-    const totalCompleteNum = todoList.filter((item) => item.isComplete).length;
-    const totalUncompletedNum = totalNum - totalCompleteNum;
-    const percentCompleted = totalNum === 0 ? 0 : totalCompleteNum / totalNum;
-
-    return {
-      totalNum,
-      totalCompleteNum,
-      totalUncompletedNum,
-      percentCompleted,
-    };
-  },
-});
 
 function TodoList() {
   const todoList = useRecoilValue(filteredTodoListState);
@@ -159,11 +97,6 @@ function TodoItemCreator() {
       <button onClick={addItem}>Add</button>
     </div>
   );
-}
-
-let id = 0;
-function getId() {
-  return id++;
 }
 
 function TodoItem({ item }) {
