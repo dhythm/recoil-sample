@@ -6,12 +6,15 @@ import {
   useSetRecoilState,
 } from "recoil";
 import "./App.css";
+import { Parent } from "./Parent";
 import { filteredTodoListState, todoListFilterState, todoListState, todoListStatsState } from "./states";
 import { getId } from "./utils";
 
 function App() {
   return (
     <RecoilRoot>
+      <Parent />
+      <hr />
       <TodoList />
     </RecoilRoot>
   );

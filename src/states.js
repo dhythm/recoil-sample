@@ -90,3 +90,8 @@ export const notCalledAtomWithFunctionState = atom({
   key: 'notCalledAtomWithFunction',
   default: baz()
 })
+
+export const nestedTestAtom = atom({
+  key: 'nestedTestAtom',
+  default: 'foo'
+})
