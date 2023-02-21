@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import {
   RecoilRoot,
   useRecoilState,
@@ -9,8 +10,18 @@ import "./App.css";
 import { Parent } from "./Parent";
 import { filteredTodoListState, todoListFilterState, todoListState, todoListStatsState } from "./states";
 import { getId } from "./utils";
+import { Location } from './Location'
 
 function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<AppBase />} />
+      <Route path="/loc" element={<Location />} />
+    </Routes>
+  )
+}
+
+function AppBase() {
   return (
     <RecoilRoot>
       <Parent />
