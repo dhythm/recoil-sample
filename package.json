@@ -39,7 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://dhythm.github.io/recoil-sample",
+  "homepage": "https://dhythm.github.io",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
