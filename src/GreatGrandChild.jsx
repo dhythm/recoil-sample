@@ -1,5 +1,5 @@
 import React from "react";
-import { RecoilRoot, useRecoilValue } from "recoil"
+import { useRecoilValue } from "recoil"
 import { nestedTestAtom } from "./states";
 
 export const GreatGrandChild = () => {
