@@ -1,4 +1,4 @@
-name: Deploy Storybook with GitHub Pages dependencies preinstalled
+name: Deploy App with GitHub Pages dependencies preinstalled
 on:
   push:
     branches:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/npm-cache
-      - name: Build Storybook
+      - name: Build App
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
