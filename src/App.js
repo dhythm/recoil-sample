@@ -27,6 +27,7 @@ function AppBase() {
       <Parent />
       <hr />
       <TodoList />
+      <a href={`${process.env.REACT_APP_BASENAME}/loc`}>go to /loc</a>
     </RecoilRoot>
   );
 }
